@@ -1,3 +1,6 @@
+# Advent of Code 2022 - Day 1
+# Eetu Knutars / @knuutti
+
 import time
 
 def main():
@@ -27,8 +30,4 @@ def main():
     return
 
 if __name__ == "__main__":
-    start_time = time.time()
     main()
-    end_time = time.time()
-
-    print(f"Analysis time: {end_time-start_time:.4f}s")
