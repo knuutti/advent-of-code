@@ -1,8 +1,6 @@
 # Advent of Code 2022 - Day 1
 # Eetu Knutars / @knuutti
 
-import time
-
 def main():
     data_file = open("D1_data.txt", 'r')
     calories = [] # stores the calories for each elf
