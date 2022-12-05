@@ -1,3 +1,8 @@
+# Advent of Code 2022 - Day 5
+# Eetu Knutars / @knuutti
+
+# Part 2
+
 def main():
 
     data_file = open("D5_data.txt", "r")

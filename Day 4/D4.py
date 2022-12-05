@@ -1,3 +1,6 @@
+# Advent of Code 2022 - Day 4
+# Eetu Knutars / @knuutti
+
 def main():
     
     data_file = open("D4_data.txt", "r")

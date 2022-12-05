@@ -1,3 +1,8 @@
+# Advent of Code 2022 - Day 3
+# Eetu Knutars / @knuutti
+
+# Part 1
+
 def main():
 
     data_file = open("D3_data.txt", 'r')
