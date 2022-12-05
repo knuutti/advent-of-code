@@ -1,8 +1,24 @@
 # Advent of Code 2022 - Day 5
 # Eetu Knutars / @knuutti
 
-import sys
-import time
+def main():
+
+    file_name = "D5_data.txt"
+
+    # Part 1
+    print("\nTop crates in Part 1: ", end = "")
+    stacks = analyse(file_name, 1)
+    for stack in stacks:
+        print(stack[0], end="")
+
+    # Part 2
+    print("\nTop crates in Part 2: ", end = "")
+    stacks = analyse(file_name, 2)
+    for stack in stacks:
+        print(stack[0], end="")
+    print("\n")
+
+    return
 
 def analyse(file_name, mode):
 
@@ -43,40 +59,21 @@ def analyse(file_name, mode):
 
         # Parsing the data
         temp = row.split(" ")
-        #print(temp)
         amount = int(temp[1])
         start = int(temp[3])-1
         end = int(temp[5])-1
 
         # Doing the crate operation
         for i in range(amount):
-            if mode.lower() == "n":
-                stacks[end].insert(0,stacks[start][0])
+            if mode == 1:
+                stacks[end].insert(0,stacks[start][0])  # Part 1
             else:
-                stacks[end].insert(i,stacks[start][0])
+                stacks[end].insert(i,stacks[start][0])  # Part 2
             stacks[start].pop(0)
 
     return stacks
 
+
+
 if __name__ == "__main__":
-
-    file_name = input("Give file name to read: ")
-    mode = input("Can the crane lift multiple crates? (y/n): ")
-    print()
-    if mode.lower() == "y":
-        crane = 1
-    elif mode.lower() == "n":
-        crane = 0
-    else:
-        print("I asked for yes or no, not that hard...")
-        sys.exit()
-
-    start = time.time()
-
-    stacks = analyse(file_name, mode)
-    for stack in stacks:
-        print(stack[0], end="")
-
-    end = time.time()
-
-    print(f"\n\nRunning time: {end-start:.2f}s")
+    main()
