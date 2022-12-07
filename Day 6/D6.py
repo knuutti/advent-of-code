@@ -3,6 +3,15 @@
 
 import time
 
+def main():
+
+    start = time.time()
+    file_name = "D6_data.txt"
+    analyse(file_name, 4)
+    analyse(file_name, 14)
+    end = time.time()
+    print(f"Running time:\n{end-start:.1f}s")
+
 def analyse(file_name, N):
 
     data_file = open(file_name, 'r')
@@ -16,16 +25,9 @@ def analyse(file_name, N):
             print(f"Number of processed characters (N = {N}): {i}")
             break
 
+    return
+
 
 
 if __name__ == "__main__":
-    
-    start = time.time()
-
-    file_name = "bigboy.txt"
-    analyse(file_name, 4)
-    analyse(file_name, 14)
-
-    end = time.time()
-
-    print(f"Running time:\n{end-start:.1f}s")
+    main()
