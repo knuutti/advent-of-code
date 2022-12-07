@@ -1,3 +1,6 @@
+# Advent of Code 2022 - Day 7
+# Eetu Knutars / @knuutti
+
 from pathlib import PurePosixPath as Path
 
 def analyse(file_name):
