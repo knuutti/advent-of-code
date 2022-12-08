@@ -10,19 +10,20 @@ def main():
     rows = len(data)
     columns = len(data[0])
 
-    # Converting data to an integer matrix 
-    M = [None] * rows
+    # Storing the data into a matrix as integer values
+    M = []
     for i in range(0, rows):
-        M[i] = [0] * columns
-    for i in range(0, rows):
+        M.append([])
         for j in range(0, columns):
-            M[i][j] = int(data[i][j])
+            M[i].append(int(data[i][j]))
+
 
     # Part 1: Computing the number of visible treese
     total = 0
     for i in range(1, rows-1):
         for j in range(1, columns-1):
 
+            # Variables for tracking the max heights for each direction
             up_max, down_max, left_max, right_max = 0,0,0,0
 
             for k in range(i+1,rows):
@@ -51,8 +52,7 @@ def main():
 
     print("Part 1:", total)
 
-
-    # Part 2: Finding the best tree score
+    # Part 2: Finding the best scenic score
     max = 0
     for i in range(1, rows-1):
         for j in range(1, columns-1):
@@ -63,33 +63,25 @@ def main():
             for k in range(i+1,rows):
                 # South
                 scores[0] += 1
-                if M[k][j] < M[i][j]:
-                    continue
-                else:
+                if M[k][j] >= M[i][j]:
                     break
 
             for k in range(i-1, -1, -1):
                 # North
                 scores[1] += 1
-                if M[k][j] < M[i][j]:
-                    continue
-                else:
+                if M[k][j] >= M[i][j]:
                     break
 
             for k in range(j+1, columns):
                 # East
                 scores[2] += 1
-                if M[i][k] < M[i][j]:
-                    continue
-                else:
+                if M[i][k] >= M[i][j]:
                     break
 
             for k in range(j-1, -1, -1):
                 # West
                 scores[3] += 1
-                if M[i][k] < M[i][j]:
-                    continue
-                else:
+                if M[i][k] >= M[i][j]:
                     break
 
             # Computing the total score for a tree
