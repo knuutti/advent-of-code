@@ -20,8 +20,6 @@ def main():
     data = file.read().split("\n\n")
     file.close()
 
-
-
     # Part 1
     monkeys = createMonkeys(data)
 
@@ -60,8 +58,6 @@ def main():
             monkey.items = []
 
     print("Part 1:", monkey_business(monkeys))
-
-
 
     # Part 2
     monkeys = createMonkeys(data)
@@ -135,39 +131,39 @@ def monkey_business(monkeys):
             max_inspections.sort()
     return max_inspections[0]*max_inspections[1]
 
-# Creating the monkey list
+# Function for creating the monkey list
 def createMonkeys(data):
 
     monkey_list: list[MONKEY] = []
 
-    for monkey in data:
-        line = monkey.split("\n")
+    for section in data:
+        line = section.split("\n")
 
-        m = MONKEY()
+        monkey = MONKEY()
 
         # Starting items
-        m.items = line[1].lstrip("Starting items: ").split(", ")
-        for i in range(len(m.items)):
-            m.items[i] = int(m.items[i])
+        monkey.items = line[1].lstrip("Starting items: ").split(", ")
+        for i in range(len(monkey.items)):
+            monkey.items[i] = int(monkey.items[i])
         
         # Operation
         if line[2].find("*") < 1:
-            m.operation = "sum"
-            m.operator = int(line[2][line[2].index("+")+1:])
+            monkey.operation = "sum"
+            monkey.operator = int(line[2][line[2].index("+")+1:])
         else:
-            m.operation = "product"
+            monkey.operation = "product"
             operator = line[2][line[2].index("*")+1:]
             if operator == " old":
-                m.operation = "power"
-                m.operator = 2
+                monkey.operation = "power"
+                monkey.operator = 2
             else:
-                m.operator = int(operator)
+                monkey.operator = int(operator)
 
-        m.division = int(line[3].lstrip("Test: divisible by "))
-        m.true_throw = int(line[4].lstrip("If true: throw to monkey "))
-        m.false_throw = int(line[5].lstrip("If false: throw to monkey "))
+        monkey.division = int(line[3].lstrip("Test: divisible by "))
+        monkey.true_throw = int(line[4].lstrip("If true: throw to monkey "))
+        monkey.false_throw = int(line[5].lstrip("If false: throw to monkey "))
 
-        monkey_list.append(m)
+        monkey_list.append(monkey)
 
     return monkey_list
 
