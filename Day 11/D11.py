@@ -20,34 +20,48 @@ def main():
     data = file.read().split("\n\n")
     file.close()
 
+
+
     # Part 1
     monkeys = createMonkeys(data)
 
+    # Starting the loop
     round = 0
     while round < 20:
         round += 1
         
+        # Going through each monkey in order
         for monkey in monkeys:
-            for i in range(len(monkey.items)):
-                item = monkey.items[i]
+            # Inspecting each item of a monkey
+            for item in monkey.items:
+
+                monkey.inspections += 1
+
+                # Changing the item value based on operation
                 if monkey.operation == "sum":
+                    # Sum
                     item = item + monkey.operator
                 elif monkey.operation == "product":
+                    # Product
                     item = item * monkey.operator
                 else:
+                    # Exponent
                     item = item ** 2
+
                 item = item // 3
 
+                # Checking where to pass the item next based on divisibility
                 if item % monkey.division == 0:
                     monkeys[monkey.true_throw].items.append(item)
                 else:
                     monkeys[monkey.false_throw].items.append(item)
 
-                monkey.inspections += 1
-
+            # After going through all the items monkey shouldn't have any more left
             monkey.items = []
 
     print("Part 1:", monkey_business(monkeys))
+
+
 
     # Part 2
     monkeys = createMonkeys(data)
