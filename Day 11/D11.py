@@ -1,4 +1,7 @@
-from math import factorial, prod
+#   Advent of Code 2022 - Day 11
+#   Eetu Knutars - @knuutti
+
+# Bruh, this time I actually had to think and not just code...
 
 class MONKEY:
     def __init__(self) -> None:
@@ -20,8 +23,9 @@ def main():
     # Part 1
     monkeys = createMonkeys(data)
 
-    round = 1
-    while round < 21:
+    round = 0
+    while round < 20:
+        round += 1
         
         for monkey in monkeys:
             for i in range(len(monkey.items)):
@@ -43,22 +47,20 @@ def main():
 
             monkey.items = []
 
-        round += 1
-
-    max_inspections = [0, 0]
-    for monkey in monkeys:
-        if monkey.inspections > max_inspections[0]:
-            max_inspections[0] = monkey.inspections
-            max_inspections.sort()
-
-    print("Part 1:", max_inspections[1]*max_inspections[0])
+    print("Part 1:", monkey_business(monkeys))
 
     # Part 2
     monkeys = createMonkeys(data)
 
+    # For this task we can't track the item values (since they are approaching to infinity...) 
+    # so instead we will track the divisibility with the division value of each monkey
+
+    # List containing the division values of each monkey
     monkey_checks = []
     for monkey in monkeys:
         monkey_checks.append(monkey.division)
+    
+    # Changing the items from values to dictionaries (containing the divisibility information)
     for monkey in monkeys:
         for i,item in enumerate(monkey.items):
             item_checks = {}
@@ -66,15 +68,20 @@ def main():
                 item_checks[check] = item % check
             monkey.items[i] = item_checks
 
-    round = 1
-    while round < 10001:
+    # Starting the loop
+    round = 0
+    while round < 10000:
+
+        round += 1
         
+        # Going through each monkey in order
         for monkey in monkeys:
+            # Inspecting all the items of the monkey
             for item in monkey.items:
-                # New inspection
+                
                 monkey.inspections += 1
 
-                # Updating the check values for an item
+                # Updating the check values (tracking divisibility) for an item
                 for check in monkey_checks:
 
                     if monkey.operation == "sum":
@@ -87,14 +94,11 @@ def main():
                         # Exponent
                         item[check] = item[check] ** 2
 
-                    item[check] 
-
                     # Updating the value if it's greater than the key value
                     if item[check] >= check:
                         item[check] = item[check] % check
 
-                # Based on whether the item is dividible or not, pass the item
-                # to the next monkey
+                # Based on whether the item is dividible or not, pass the item to the next monkey
                 if item[monkey.division] == 0:
                     # Item is dividible
                     monkeys[monkey.true_throw].items.append(item)
@@ -104,18 +108,18 @@ def main():
 
             monkey.items = []
 
-        round += 1
+    print("Part 2:", monkey_business(monkeys))
 
-    # Calculating the level of monkey business
+    return
+
+# Function for calculating the level of monkey business
+def monkey_business(monkeys):
     max_inspections = [0, 0]
     for monkey in monkeys:
         if monkey.inspections > max_inspections[0]:
             max_inspections[0] = monkey.inspections
             max_inspections.sort()
-
-    print("Part 2:", max_inspections[0]*max_inspections[1])
-
-    return
+    return max_inspections[0]*max_inspections[1]
 
 # Creating the monkey list
 def createMonkeys(data):
