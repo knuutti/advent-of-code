@@ -1,6 +1,8 @@
 #   Advent of Code 2022 - Day 12
 #   Eetu Knutars / @knuutti
 
+# Note to self: Read the task description... entirely.
+
 # Structure for the class Graph and Dijkstra's algorithm implemented 
 # from GeeksforGeeks
 class Graph():
