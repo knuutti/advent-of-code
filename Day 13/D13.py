@@ -7,6 +7,8 @@ import json
 
 def main():
 
+    sorted_list = []
+
     file_name = "D13_data.txt"
     file = open(file_name, 'r')
     data = file.read().splitlines()
@@ -29,6 +31,44 @@ def main():
             score += i+1
 
     print("Part 1:", score)
+
+    for i,pair in enumerate(M):
+        order = -1
+        for i,item in enumerate(sorted_list):
+            order = compare(pair[0], item)
+            if order >= 0:
+                sorted_list.insert(i, pair[0])
+                break
+        if order < 0:
+            sorted_list.append(pair[0])
+
+        for i,item in enumerate(sorted_list):
+            order = compare(pair[1], item)
+            if order >= 0:
+                sorted_list.insert(i, pair[1])
+                break
+            else:
+                order = -1
+        if order < 0:
+            sorted_list.append(pair[1])
+
+    loc_1, loc_2 = None, None
+
+    for i,item in enumerate(sorted_list):
+            order = compare([[2]], item)
+            if order >= 0:
+                loc_1 = i + 1
+                break
+
+    for i,item in enumerate(sorted_list):
+            order = compare([[6]], item)
+            if order >= 0:
+                loc_2 = i + 2
+                break
+
+
+    print("Part 2:", loc_1*loc_2)
+    
 
 def compare(left, right):
 
