@@ -3,18 +3,15 @@
 
 import json
 
-# only Part 1
-
 def main():
 
-    sorted_list = []
-
+    # Reading the data
     file_name = "D13_data.txt"
     file = open(file_name, 'r')
     data = file.read().splitlines()
     file.close()
 
-    # Strings to data types
+    # Converting strings to data types using json-library
     i, M = 0, [[]]
     for packet in data:
         if len(packet) == 0:
@@ -28,48 +25,49 @@ def main():
 
         order = compare(pair[0], pair[1])
         if order >= 0:
+            # If the pair is in order, increase the score
             score += i+1
 
     print("Part 1:", score)
+    
+    # List for storing the items in order
+    sorted_list = []
 
     for i,pair in enumerate(M):
-        order = -1
+        for i in range(2):
+            # Inserting both item from the pair 
+            # to the sorted list
+            order = -1
+            for j,item in enumerate(sorted_list):
+                order = compare(pair[i], item)
+                if order >= 0:
+                    # The current item in sorted list is 
+                    # greater than the prosessed item
+                    # -> put the item here
+                    sorted_list.insert(j, pair[i])
+                    break
+            if order < 0:
+                # If the item should be put 
+                # to the end of the list
+                sorted_list.append(pair[i])
+
+    # Now we need to find the locations of 
+    # [[2]] and [[6]] in the sorted list
+    loc = [0,0]
+    dividers = [[[2]],[[6]]]
+
+    for j,divider in enumerate(dividers):
+        # Finding the location of the dividers
         for i,item in enumerate(sorted_list):
-            order = compare(pair[0], item)
-            if order >= 0:
-                sorted_list.insert(i, pair[0])
-                break
-        if order < 0:
-            sorted_list.append(pair[0])
+                order = compare(divider, item)
+                if order >= 0:
+                    # Location of the divider
+                    loc[j] = i + j + 1
+                    break
 
-        for i,item in enumerate(sorted_list):
-            order = compare(pair[1], item)
-            if order >= 0:
-                sorted_list.insert(i, pair[1])
-                break
-            else:
-                order = -1
-        if order < 0:
-            sorted_list.append(pair[1])
-
-    loc_1, loc_2 = None, None
-
-    for i,item in enumerate(sorted_list):
-            order = compare([[2]], item)
-            if order >= 0:
-                loc_1 = i + 1
-                break
-
-    for i,item in enumerate(sorted_list):
-            order = compare([[6]], item)
-            if order >= 0:
-                loc_2 = i + 2
-                break
-
-
-    print("Part 2:", loc_1*loc_2)
+    print("Part 2:", loc[0]*loc[1])
     
-
+# Function for comparing two items
 def compare(left, right):
 
     order = 0
@@ -110,6 +108,9 @@ def compare(left, right):
 
     return order
 
-main()
+
+
+if __name__ == "__main__":
+    main()
 
 
