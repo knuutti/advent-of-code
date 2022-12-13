@@ -1,4 +1,10 @@
+#   Advent of Code 2022 - Day 13
+#   Eetu Knutars / @knuutti
+
 import json
+
+# STILL WORK IN PROGRESS
+# DOESN'T PRINT THE CORRECT ANSWER
 
 def main():
 
