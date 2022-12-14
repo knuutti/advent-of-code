@@ -91,7 +91,8 @@ def compare(left, right):
             order = -1
         elif len(left) == 0 and len(right) > 0:
             order = 1
-        elif len(left) == 0 and len(right) == 0:
+        elif len(left) == len(right) == 0: 
+            # idea for shortening the notation by Totti Sillanpää
             order = 0
         else:
             for i in range(len(left)):
