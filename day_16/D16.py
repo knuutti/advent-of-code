@@ -52,7 +52,7 @@ class Graph():
 
 def main():
 
-    file = open('D16_data.txt', 'r')
+    file = open('D16_example.txt', 'r')
     data = file.read().splitlines()
     file.close()
 
@@ -75,7 +75,6 @@ def main():
         for _ in range(len(valve_names)):
             M[i].append(0)
 
-
     for line in data:        
         temp = line.split('=')
         index = valve_names[temp[0].rstrip(' has flow rate')[6:]]
@@ -88,17 +87,13 @@ def main():
         for i in range(1, len(temp)):
             M[index][valve_names[temp[i]]] = 1
 
+    flow_value_copy = flow_values.copy() # creating copy for Part 2
     graph = Graph(len(valve_names), M)
-
-    
-
     distances = []
     for i in range(valves):
         distances.append(graph.dijkstra(i))
 
-    ######################## ANALYSIS
-
-    total_flow, current_flow, current_location, best = 0, 0, valve_names['AA'], valve_names['AA']
+    total_flow, current_location, best = 0, valve_names['AA'], valve_names['AA']
     time_remaining = 30
 
     best_value = flow_values[best] * 2
@@ -138,6 +133,85 @@ def main():
         current_location = best
         
     print("Part 1:", total_flow)
+
+
+
+
+
+
+
+
+
+    current_location = valve_names['AA']
+    current_location_elephant = valve_names['AA']
+    time_remaining = 26
+    time_remaining_elephant = 26
+    total_flow = 0
+    flow_values = flow_value_copy.copy()
+    elephant, you = None, None
+
+    best = get_best(current_location, current_location_elephant, valves, flow_values, distances, time_remaining)
+    time_remaining -= distances[current_location][best] 
+    current_location = best 
+
+    # Opening a valve
+    time_remaining -= 1
+    total_flow += time_remaining*flow_values[current_location]
+    flow_values[current_location] = 0
+
+    best = get_best(current_location_elephant, current_location, valves, flow_values, distances, time_remaining_elephant)
+    time_remaining_elephant -= distances[current_location_elephant][best]   # moving to the valve
+    current_location_elephant = best # updating current location
+
+    # Elephant opening a valve
+    time_remaining_elephant -= 1
+    total_flow += time_remaining_elephant*flow_values[current_location_elephant]
+    flow_values[current_location_elephant] = 0
+
+    while True:
+        
+        best = get_best(current_location,current_location_elephant,valves,flow_values,distances,time_remaining)
+        time_remaining -= distances[current_location][best]
+        if current_location == best:
+            you = "done"
+        current_location = best
+
+        # Opening a valve
+        time_remaining -= 1
+        total_flow += time_remaining*flow_values[current_location]
+        flow_values[current_location] = 0
+        
+
+        best = get_best(current_location_elephant, current_location, valves, flow_values, distances, time_remaining_elephant)
+        time_remaining_elephant -= distances[current_location_elephant][best]
+        if current_location_elephant == best:
+            elephant = "done"
+        current_location_elephant = best
+        
+        # Elephant opening a valve
+        time_remaining_elephant -= 1
+        total_flow += time_remaining_elephant*flow_values[current_location_elephant]
+        flow_values[current_location_elephant] = 0
+
+        if you == elephant == "done":
+            break
+
+    print(total_flow)
+
+def get_best(my_location, friend_location, valves, flow_values, distances, time_remaining):
+    best = my_location
+    best_value = 0
+    for i in range(valves):
+        if i == my_location or distances[my_location][i] >= time_remaining or i == friend_location:
+            continue
+        # finding the best location to move next
+        flow_value = flow_values[i]/(distances[my_location][i])
+        elephant_flow_value = flow_values[i]/(distances[friend_location][i])
+        if flow_value > best_value:
+            best = i
+            best_value = flow_value
+    return best
+
 
 
 
