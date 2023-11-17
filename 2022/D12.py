@@ -56,7 +56,7 @@ class Graph():
     
 def main():
 
-    file_name = "D12_data.txt"
+    file_name = "d12_data.txt"
     file = open(file_name, 'r')
     data = file.read().splitlines()
     file.close()

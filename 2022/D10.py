@@ -9,7 +9,7 @@ def main():
     sprite_position = [0, 1, 2]
     sprite = ""
 
-    file_name = "D10_data.txt"
+    file_name = "d10_data.txt"
     file = open(file_name, 'r')
     data = file.read().splitlines()
     file.close()

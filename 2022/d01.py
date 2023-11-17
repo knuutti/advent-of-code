@@ -2,7 +2,7 @@
 # Eetu Knutars / @knuutti
 
 def main():
-    data_file = open("D1_data.txt", 'r')
+    data_file = open("d01_data.txt", 'r')
     calories = [] # stores the calories for each elf
     calories_elf = 0 # calory count for one elf in each iteration
     

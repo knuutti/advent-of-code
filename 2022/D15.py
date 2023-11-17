@@ -5,7 +5,7 @@
 
 def main():
     
-    file_name = 'D15_data.txt'
+    file_name = 'd15_data.txt'
     file = open(file_name, 'r')
     data = file.read().splitlines()
     file.close()

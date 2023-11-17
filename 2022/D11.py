@@ -15,7 +15,7 @@ class MONKEY:
 
 def main():
 
-    file_name = "D11_data.txt"
+    file_name = "d11_data.txt"
     file = open(file_name, 'r')
     data = file.read().split("\n\n")
     file.close()

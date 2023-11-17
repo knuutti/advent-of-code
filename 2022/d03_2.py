@@ -5,7 +5,7 @@
 
 def main():
 
-    data_file = open("D3_data.txt", 'r')
+    data_file = open("d03_data.txt", 'r')
 
     sum_all = 0
 

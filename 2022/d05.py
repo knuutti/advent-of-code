@@ -3,7 +3,7 @@
 
 def main():
 
-    file_name = "D5_data.txt"
+    file_name = "d05_data.txt"
 
     # Part 1
     print("\nTop crates in Part 1: ", end = "")

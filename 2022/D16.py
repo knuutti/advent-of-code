@@ -52,7 +52,7 @@ class Graph():
 
 def main():
 
-    file = open('D16_example.txt', 'r')
+    file = open('d16_example.txt', 'r')
     data = file.read().splitlines()
     file.close()
 

@@ -6,7 +6,7 @@ import json
 def main():
 
     # Reading the data
-    file_name = "D13_data.txt"
+    file_name = "d13_data.txt"
     file = open(file_name, 'r')
     data = file.read().splitlines()
     file.close()

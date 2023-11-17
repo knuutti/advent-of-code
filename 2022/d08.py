@@ -3,7 +3,7 @@
 
 def main():
 
-    data_file = open("D8_data.txt", 'r')
+    data_file = open("d08_data.txt", 'r')
     data = data_file.read().splitlines()
 
     # Defining the row and column lengths

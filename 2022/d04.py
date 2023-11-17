@@ -3,7 +3,7 @@
 
 def main():
     
-    data_file = open("D4_data.txt", "r")
+    data_file = open("d04_data.txt", "r")
     data = data_file.readlines()
     data_file.close()
 

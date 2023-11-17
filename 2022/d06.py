@@ -6,7 +6,7 @@ import time
 def main():
 
     start = time.time()
-    file_name = "D6_data.txt"
+    file_name = "d06_data.txt"
     analyse(file_name, 4)
     analyse(file_name, 14)
     end = time.time()

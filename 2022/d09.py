@@ -3,7 +3,7 @@
 
 def main():
 
-    file_name = "D9_data.txt"
+    file_name = "d09_data.txt"
     file = open(file_name, 'r')
     data = file.read().splitlines()
 
