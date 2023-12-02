@@ -3,7 +3,7 @@
 
 def main():   
     
-    fname = "./2023/d01_data.txt"
+    fname = "./2023/Day 01/input.txt"
     file = open(fname, 'r')
     data = file.read().splitlines()
     file.close()
@@ -39,11 +39,12 @@ def find_digit(line, ran, mode):
 def sum_of_digits(data, mode):
 
     total = 0
-    for line in data:
+    for i,line in enumerate(data):
         # Finding the first and last digit of each line
         first = find_digit(line, range(0, len(line)), mode)
         last = find_digit(line, range(len(line)-1, -1, -1), mode)
-        total += 10*first + last
+        if first and last:
+            total += 10*first + last
 
     return total
 
