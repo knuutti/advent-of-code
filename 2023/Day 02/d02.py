@@ -35,10 +35,12 @@ def analyse(line, cube_limits):
         cubes = game_set.split(", ")
 
         for cube in cubes:
+            # Update the amount of cubes in the set
             cube = cube.split(" ")
             amounts[cube[1]] += int(cube[0])
 
         for color in amounts:
+            # If current amount of one color is more than the previous minimum -> update the value
             if amounts[color] > min_cubes[color]:
                 min_cubes[color] = amounts[color]
 
