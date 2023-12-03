@@ -39,7 +39,7 @@ def find_digit(line, ran, mode):
 def sum_of_digits(data, mode):
 
     total = 0
-    for i,line in enumerate(data):
+    for line in data:
         # Finding the first and last digit of each line
         first = find_digit(line, range(0, len(line)), mode)
         last = find_digit(line, range(len(line)-1, -1, -1), mode)
