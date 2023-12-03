@@ -3,7 +3,7 @@
 
 def main():   
     
-    fname = "./2023/Day 02/input.txt"
+    fname = "./2023/Day 02/bigboy.txt"
     file = open(fname, 'r')
     data = file.read().splitlines()
     file.close()
