@@ -16,8 +16,10 @@ def main():
         for j,char in enumerate(line):
             # Finding the symbols
             if not char.isnumeric() and char != ".":
+                # Get surrounding indeces
                 neighbours = get_neigbour_indeces(i,j,len(data)-1, len(line)-1)
                 neig = {}
+                
                 for neighbour in neighbours:
                     if data[neighbour[0]][neighbour[1]].isnumeric():
                         temp = find_numbers(neighbour[0],neighbour[1], data, len(line)-1)
