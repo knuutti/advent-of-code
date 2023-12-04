@@ -9,11 +9,12 @@ def main():
     
     file.close()
 
-    numbers = {}
-    gears = {}
+    numbers = {} # storing the numbers
+    gears = {} # storing the gear ratios
 
     for i,line in enumerate(data):
         for j,char in enumerate(line):
+            # Finding the symbols
             if not char.isnumeric() and char != ".":
                 neighbours = get_neigbour_indeces(i,j,len(data)-1, len(line)-1)
                 neig = {}
