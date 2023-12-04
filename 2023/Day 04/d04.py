@@ -11,8 +11,8 @@ def main():
 
         line = line.split(": ")
         line = line[1].split(" | ")
-        winning_numbers = check_winning_numbers(line)
-        wins = check_wins(line, winning_numbers)
+        winning_numbers = check_winning_numbers(line[0])
+        wins = check_wins(line[1], winning_numbers)
 
         if wins:
             total += 2**(wins-1) # update the points
@@ -23,24 +23,18 @@ def main():
     print("Part 1:", total)
     print("Part 2:", sum(copies))
 
-
 def check_winning_numbers(line):
     winning = []
-    for num in line[0].split(" "):
-        if num == "":
-            continue
-        winning.append(int(num))
+    for num in line.split():
+        winning.append(num)
     return winning
 
 def check_wins(line, winning_numbers):
     wins = 0
-    for num in line[1].split(" "):
-        if num == "":
-            continue
-        if int(num) in winning_numbers:
+    for num in line.split():
+        if num in winning_numbers:
             wins += 1
     return wins
 
-    
 if __name__ == "__main__":
     main()
