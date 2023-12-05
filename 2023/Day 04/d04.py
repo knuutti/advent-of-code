@@ -1,5 +1,5 @@
 def main():   
-    fname = "./2023/Day 04/input.txt"
+    fname = "./2023/Day 04/bigboy.txt"
     file = open(fname, 'r')
     data = file.read().splitlines()
     points = 0
@@ -32,4 +32,5 @@ def check_wins(line, winning_numbers):
     return wins
 
 if __name__ == "__main__":
+    
     main()
