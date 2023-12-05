@@ -1,3 +1,6 @@
+# Advent of Code 2023 - Day 4
+# Eetu Knutars / @knuutti
+
 def main():   
     fname = "./2023/Day 04/bigboy.txt"
     file = open(fname, 'r')
