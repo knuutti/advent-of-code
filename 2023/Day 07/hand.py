@@ -1,50 +1,3 @@
-# Advent of Code 2023 - Day 7
-# Eetu Knutars / @knuutti
-
-def main():   
-    fname = "./2023/Day 07/input.txt"
-    file = open(fname, 'r')
-    data = file.read().splitlines()
-    print("Part 1:",analyse(data,0))
-    print("Part 2:",analyse(data,1))
-
-def analyse(data, mode):
-    # Generates hands using the Hand class defined in hand.py
-    hands = []
-    for i,row in enumerate(data):
-        row = row.split()
-        hands.append(Hand(row[0],row[1], mode))
-    # Sorting the hands
-    ranked_hands = sort_hands(hands)
-    # Calculating the result (rank * bid)
-    total = 0
-    for i,h in enumerate(ranked_hands):
-        rank = (len(ranked_hands)-i)
-        total += rank*h.bid
-    return total
-
-# Sorting the hands based on their level and contents
-def sort_hands(hands):
-    ranked_hands = [hands[0]]
-    for hand in hands[1:]:
-        added = False
-        for i,hand_to_compare in enumerate(ranked_hands):
-            if hand.level > hand_to_compare.level:
-                ranked_hands.insert(i, hand)
-                added = True
-            elif hand.level == hand_to_compare.level:
-                for j in range(0,5):
-                    if hand.cards[j] > hand_to_compare.cards[j]:
-                        ranked_hands.insert(i, hand)
-                        added = True
-                        break
-                    elif hand.cards[j] < hand_to_compare.cards[j]:
-                        break
-            if added == True:
-                break
-        if added == False: ranked_hands.append(hand)
-    return ranked_hands
-
 class Hand():
     def __init__(self, hand, bid, mode):
         self.cards = []
@@ -113,6 +66,3 @@ class Hand():
             else: return 11
         if str_card == "T": return 10
         return int(str_card)
-
-if __name__ == "__main__":
-    main()
