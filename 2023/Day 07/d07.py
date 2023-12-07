@@ -9,7 +9,7 @@ def main():
     print("Part 2:",analyse(data,1))
 
 def analyse(data, mode):
-    # Generates hands using the Hand class defined in hand.py
+    # Generates hands using the Hand class
     hands = []
     for i,row in enumerate(data):
         row = row.split()
