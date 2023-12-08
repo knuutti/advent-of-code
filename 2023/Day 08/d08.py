@@ -1,6 +1,12 @@
 # Advent of Code 2023 - Day 8
 # Eetu Knutars / @knuutti
 
+# For part 2 the input creates loops where --Z only occurs once,
+# which makes solving the problem rather trivial. Because of that
+# I designed this solution for similar inputs. It could've been
+# nice additional challenge to make the solution more generic,
+# but I'm fine with this at the moment.
+
 import math
 
 def main():   
