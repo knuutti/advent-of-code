@@ -10,40 +10,32 @@ def main():
 
     start = find_start_index(data)
     start_type = get_start_type(start, data)
-    pipes = find_connectives(start,data,[0,0])
-    
-    counter = 1
-    current_pipe = pipes
-    delta = [current_pipe[0]-start[0],current_pipe[1]-start[1]]
-
-    total_pipes = {str(start): start_type}
     data[start[0]] = data[start[0]].replace("S", start_type)
+    total_pipes = find_pipes(start,start_type,data)
 
-    min_y = start[0]
-    max_y = start[0]
-    min_x = start[1]
-    max_x = start[1]
+    print("Part 1:", len(total_pipes)//2)
+    print("Part 2:", find_insiders(total_pipes, data))
 
+def find_pipes(start, start_type, data):
+    pipe = find_connectives(start,data,[0,0])
+    # Finding all the pipes in the loop that contains S
+    total_pipes = {str(start): start_type}
+    current_pipe = pipe
+    delta = [current_pipe[0]-start[0],current_pipe[1]-start[1]]
     while current_pipe != start:
-
-        if current_pipe[0] < min_y: min_y = current_pipe[0]
-        if current_pipe[0] > max_y: max_y = current_pipe[0]
-        if current_pipe[1] < min_x: min_x = current_pipe[1]
-        if current_pipe[1] > max_x: max_x = current_pipe[1]
-
         total_pipes[str(current_pipe)] = data[current_pipe[0]][current_pipe[1]]
         new_pipe = find_connectives(current_pipe,data,delta)
         delta = [new_pipe[0]-current_pipe[0],new_pipe[1]-current_pipe[1]]
         current_pipe = new_pipe
-        counter += 1
+    return total_pipes
 
-
+def find_insiders(total_pipes, data):
     # Finding the bits withing the loop
     withins = {}
     previous_corner = None
-    for i in range(min_y, max_y+1):
+    for i in range(0, len(data[0])):
         vertical_pipe_counter = 0
-        for j in range(min_x, max_x+1):
+        for j in range(0, len(data)):
             if str([i,j]) in total_pipes and data[i][j] == "|":
                 vertical_pipe_counter += 1
                 continue
@@ -61,11 +53,7 @@ def main():
                     previous_corner = None
                     if a:
                         vertical_pipe_counter += 1
-    
-    print("Part 1:", counter//2)
-    print("Part 2:", len(withins))
-
-
+    return len(withins)
 
 def find_start_index(data):
     for r in range(len(data)):
@@ -111,19 +99,19 @@ def find_connectives(start,data,delta):
     curr = data[start[0]][start[1]]
     if start[1] != 0 and delta[1] != 1 and curr not in ["F","L", "|"]:
         pipe_west = data[start[0]][start[1]-1]
-        if pipe_west in ["-", "L", "F", "S"]:
+        if pipe_west in ["-", "L", "F"]:
             return [start[0], start[1]-1]
     if start[1] != len(data[0])-1 and delta[1] != -1 and curr not in ["J","7", "|"]:
         pipe_east = data[start[0]][start[1]+1]
-        if pipe_east in ["-", "J", "7", "S"]:
+        if pipe_east in ["-", "J", "7"]:
             return [start[0], start[1]+1]
     if start[0] != 0 and delta[0] != 1 and curr not in ["-","F", "7"]:
         pipe_north = data[start[0]-1][start[1]]
-        if pipe_north in ["|", "F", "7", "S"]:
+        if pipe_north in ["|", "F", "7"]:
             return [start[0]-1, start[1]]
     if start[0] != len(data)-1 and delta[0] != -1 and curr not in ["J","L", "-"]:
         pipe_south = data[start[0]+1][start[1]]
-        if pipe_south in ["|", "J", "L", "S"]:
+        if pipe_south in ["|", "J", "L"]:
            return [start[0]+1, start[1]]
 
 
