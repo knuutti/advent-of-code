@@ -1,7 +1,5 @@
-# Advent of Code 2023 - Day 10
+# Advent of Code 2023 - Day 11
 # Eetu Knutars / @knuutti
-
-# Slightly more complicated than the previous day
 
 def main():   
     fname = "./2023/Day 11/input.txt"
