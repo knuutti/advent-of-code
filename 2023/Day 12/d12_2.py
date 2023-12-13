@@ -1,35 +1,41 @@
-import datetime
-
 def main():
-    start = datetime.datetime.now()
-    fname = "./2023/Day 12/input.txt"
+    fname = "./2023/Day 12/example.txt"
     file = open(fname, 'r')
     data = file.read().splitlines()
-    counter = 0
-    for i,row in enumerate(data):
-        print(i+1)
-        row, groups = parse_data(row, 1)
-        counter += get_counts(row, groups)
+    #counter = 0
+    for i,row in enumerate(data[0:1]):
+        #print(i+1)
+        row, _ = parse_data(row, 0)
+        #counter += get_counts(row, groups)
+        combs, known = get_combinations(row, {})
+        print(known)
+        
+    #print(counter)
+
+
+def get_combinations(row: str, known: dict):
+    #print(row)
+    groups = row.replace(".", " ").split()
+    combs = []
+    for group in groups:
+        if group in known:
+            continue
+        combs = []
+        print(group)
+        if not group.count("?"):
+            known[group] = len(group)
+            combs = [len(group)]
+
+        elif group not in known:
+            index = group.find("?")
+            combs1, known = get_combinations(group[:index] + "." + group[index+1:], known)
+            combs2, known = get_combinations(group[:index] + "#" + group[index+1:], known)
+            combs1.extend(combs2)
+            combs.append(combs1)
+            known[group] = combs
     
-    file = open('tulos.txt', 'w')
-    file.write(str(counter))
-    file.close()
-
-    end = datetime.datetime.now()
-
-    print(end-start)
-
-def parse_data(row, mode):
-    row = row.split()
-    groups = [int(x) for x in (row[1]).split(',')]
-    row = row[0]
-    if mode:
-        row = row + 4*("?" + row)
-        g = groups.copy()
-        for _ in range(4):
-            groups.extend(g)
-    #print(row, groups)
-    return row, groups
+        print(combs)
+    return combs, known
 
 def get_counts(row: str, groups: list):
     if row.count("?") + row.count("#") < sum(groups):
@@ -66,6 +72,17 @@ def get_counts(row: str, groups: list):
     index = row.find("?")
     return get_counts(row[:index] + "#" + row[index+1:], groups) + get_counts(row[:index] + "." + row[index+1:], groups)
 
+def parse_data(row: str, mode: int):
+    row = row.split()
+    groups = [int(x) for x in (row[1]).split(',')]
+    row = row[0]
+    if mode:
+        row = row + 4*("?" + row)
+        g = groups.copy()
+        for _ in range(4):
+            groups.extend(g)
+    #print(row, groups)
+    return row, groups
 
 if __name__ == '__main__':
     main()
