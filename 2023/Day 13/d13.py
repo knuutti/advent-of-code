@@ -1,3 +1,8 @@
+# Advent of Code 2023 - Day 13
+# Eetu Knutars / @knuutti
+
+# Good mirrors
+
 def main():
     fname = "./2023/Day 13/input.txt"
     file = open(fname, 'r')
@@ -56,6 +61,7 @@ def condition(s1,s2,mode):
     for i in range(0,len(s1)):
         if s1[i] != s2[i]:
             diffs+=1
+            if diffs > mode: return False
     if diffs == mode:
         return True
     return False

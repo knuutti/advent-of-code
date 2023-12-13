@@ -1,23 +1,18 @@
-import datetime
+# Advent of Code 2023 - Day 12
+# Eetu Knutars / @knuutti
+
+# Solved part 1 only :(
 
 def main():
-    start = datetime.datetime.now()
     fname = "./2023/Day 12/input.txt"
     file = open(fname, 'r')
     data = file.read().splitlines()
     counter = 0
     for i,row in enumerate(data):
-        print(i+1)
-        row, groups = parse_data(row, 1)
+        row, groups = parse_data(row, 0)
         counter += get_counts(row, groups)
-    
-    file = open('tulos.txt', 'w')
-    file.write(str(counter))
-    file.close()
 
-    end = datetime.datetime.now()
-
-    print(end-start)
+    print("Part 1:", counter)
 
 def parse_data(row, mode):
     row = row.split()
