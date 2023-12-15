@@ -1,7 +1,5 @@
-# Advent of Code 2023 - Day 13
+# Advent of Code 2023 - Day 15
 # Eetu Knutars / @knuutti
-
-# Good mirrors
 
 def main():
     fname = "./2023/Day 15/input.txt"
