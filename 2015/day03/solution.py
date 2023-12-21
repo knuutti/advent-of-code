@@ -5,8 +5,7 @@ def main():
     print("Part 1:",silver(data))
     print("Part 2:",gold(data))
 
-
-
+# Solution to part one
 def silver(data):
     locs = {(0,0): 1}
     x,y = 0,0
@@ -20,8 +19,7 @@ def silver(data):
         if (x,y) not in locs: locs[(x,y)] = 0
     return len(locs)
 
-
-
+# Solution to part two
 def gold(data):
     locs = {(0,0): 1}
     sx,sy,rx,ry = 0,0,0,0
@@ -40,7 +38,6 @@ def gold(data):
         if i % 2 == 0: sx,sy = x,y
         else: rx,ry = x,y
     return len(locs)
-
 
 
 if __name__ == '__main__':
