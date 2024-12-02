@@ -3,11 +3,7 @@ from itertools import combinations
 
 def is_safe(report):
     deltas = np.diff(report)
-    if not np.all([i in [1,2,3] for i in np.abs(deltas)]):
-        return 0
-    elif np.all(np.sign(deltas) == np.sign(deltas)[0]):
-        return 1
-    return 0
+    return np.all([i in [1,2,3] for i in np.abs(deltas)]) and np.all(np.sign(deltas) == np.sign(deltas)[0])
 
 silver, gold = 0, 0
 data = [list(map(int, x.split())) for x in open("input_day2.txt").read().splitlines()]
