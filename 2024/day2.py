@@ -3,7 +3,7 @@ from itertools import combinations
 
 def is_safe(report):
     deltas = np.diff(report)
-    if np.max(np.abs(deltas)) > 3 or np.min(np.abs(deltas)) < 1:
+    if not np.all([i in [1,2,3] for i in np.abs(deltas)]):
         return 0
     elif np.all(np.sign(deltas) == np.sign(deltas)[0]):
         return 1
