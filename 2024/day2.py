@@ -15,11 +15,10 @@ data = [list(map(int, x.split())) for x in open("input_day2.txt").read().splitli
 for report in data:
     combs = list(combinations(report, len(report)-1))
     combs.insert(0, report)
-    for i,c in enumerate(combs):
-        if is_safe(c):
+    for i,comb in enumerate(combs):
+        if is_safe(comb):
+            silver += 1*(i==0)
             gold += 1
-            if i == 0:
-                silver += 1
             break
 
 print("Silver", silver)
