@@ -1,12 +1,10 @@
-import re
+from re import findall
 
-silver = 0
-gold = 0
-
+silver, gold = 0, 0
 data = open("input_day3.txt", 'r').read()
 
 # Parses all valid mul, do and dont substrings into one list
-substrings = re.findall("mul[(]\\d+,\\d+[)]|do[(][)]|don't[(][)]", data)
+substrings = findall("mul[(]\\d+,\\d+[)]|do[(][)]|don't[(][)]", data)
 
 do = True
 for s in substrings:
@@ -15,9 +13,7 @@ for s in substrings:
         product = int(a[1][:-1])*int(a[0][4:])
         silver += product
         gold += product*do
-    elif s[2] == "n":
-        do = False
-    elif s[0] == "d": do = True
+    else: do = s[2] != "n" 
 
 print("Silver:", silver)
 print("Gold", gold)
