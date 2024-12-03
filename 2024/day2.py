@@ -9,11 +9,13 @@ silver, gold = 0, 0
 data = [list(map(int, x.split())) for x in open("input_day2.txt").read().splitlines()]
 
 for report in data:
+    if is_safe(report):
+        silver += 1
+        gold += 1
+        continue
     combs = list(combinations(report, len(report)-1))
-    combs.insert(0, report)
     for i,comb in enumerate(combs):
         if is_safe(comb):
-            silver += 1*(i==0)
             gold += 1
             break
 
