@@ -30,10 +30,13 @@ for i in range(75):
         stone_counts[stone] -= orig_counts[stone]
         if stone not in transforms:
             stones = new_stones(stone)
-            for s in stones: 
-                if s not in stone_counts:
-                    stone_counts[s] = orig_counts[stone]
-                else: stone_counts[s] += orig_counts[stone]
+            transforms[stone] = stones
+        else: stones = transforms[stone]
+        for s in stones: 
+            if s not in stone_counts:
+                stone_counts[s] = orig_counts[stone]
+            else: stone_counts[s] += orig_counts[stone]
+        
     
     if i==24:
         silver = 0
