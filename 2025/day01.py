@@ -1,15 +1,16 @@
 def turn(current: int, direction: str, distance: int) -> int:
     current_start = current
+
     if direction == "R":
         current += distance
     else:
         current -= distance
     clicks = abs(current // 100)
-    current %= 100
+    current = (current) % 100
 
-    if current == 0 and direction == "L": clicks += 1
-
-    if current_start == 0 and direction == "L": clicks -= 1
+    if direction == "L": 
+        if current == 0: clicks += 1
+        if current_start == 0: clicks -= 1
 
     return current, clicks
 
