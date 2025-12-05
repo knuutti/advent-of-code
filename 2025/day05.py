@@ -29,7 +29,7 @@ print("Silver:", total_fresh)
 # Part 2: find the total number of valid items in ranges
 # I used divide-and-conquer approach, splitting all ranges into subranges
 
-# First round of processing split into subranges
+# First round of processing: split into subranges
 subranges = {}
 for r in ranges:
     subendpoints = []
